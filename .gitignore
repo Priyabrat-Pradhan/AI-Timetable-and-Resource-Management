@@ -1,0 +1,4 @@
+backend/academic_tms/.env
+backend/academic_tms/ai_timetable_data.sqlite3
+backend/academic_tms/.vite-cache/
+node_modules/

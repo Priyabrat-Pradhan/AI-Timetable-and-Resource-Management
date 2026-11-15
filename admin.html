@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI SmartTime Admin</title>
+    <script src="./smarttime-config.js"></script>
+    <script type="module" src="/src/main.jsx"></script>
+    <link rel="stylesheet" href="./admin-change-password.css">
+<script>
+try {
+  const account = JSON.parse(localStorage.getItem("smartTimeUser") || "null");
+  if (!localStorage.getItem("smartTimeToken") || account?.role !== "admin") window.location.replace("./login.html");
+} catch { window.location.replace("./login.html"); }
+  document.addEventListener("click", async (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
+    const label = (button.textContent || "").trim().toLowerCase();
+    if (!button.classList.contains("logout-button") && label !== "logout") return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (!window.confirm("Are you sure you want to logout?")) return;
+    const token = localStorage.getItem("smartTimeToken");
+    try {
+      if (token) await fetch(`${window.SMARTTIME_API_BASE || "http://127.0.0.1:8000/api"}/auth/logout/`, {
+        method: "POST", headers: { Authorization: `Token ${token}` },
+        signal: AbortSignal.timeout(2500)
+      });
+    } catch (error) { console.warn("Could not revoke admin token:", error); }
+    finally {
+      ["smartTimeToken", "smartTimeUser", "smartTimeUserId", "loggedIn", "userRole", "userEmail", "userName"].forEach((key) => localStorage.removeItem(key));
+      window.location.replace("./login.html");
+    }
+  }, true);
+</script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./admin-change-password.js"></script>
+
+  </body>
+</html>
+

@@ -1,2 +1,12 @@
-# AI-Timetable-and-Resource-Management
-An AI-based academic timetable generation and resource management system designed to automate scheduling, manage faculty, students, and classrooms, and improve resource utilization.
+# AI-Based Academic Time Table and Resource Management System
+
+This project includes a React application built with Vite and the original standalone HTML pages.
+
+## Run the React app
+
+Install dependencies and start the development server:
+
+```sh
+npm install
+npm run dev
+```

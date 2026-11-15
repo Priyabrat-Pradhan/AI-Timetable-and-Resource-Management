@@ -1,0 +1,2 @@
+Unauthorized: /api/ai-timetable/generate/
+[12/Nov/2026 09:01:47] "GET /api/ai-timetable/generate/ HTTP/1.1" 401 58
