@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-const API = window.SMARTTIME_API_BASE || "http://127.0.0.1:8000/api";
+const API = import.meta.env.VITE_API_BASE || window.SMARTTIME_API_BASE || "http://127.0.0.1:8000/api";
 const token = () => localStorage.getItem("smartTimeToken");
 async function api(path, options = {}) {
   const response = await fetch(`${API}${path}`, { ...options, headers: { ...(options.body ? { "Content-Type": "application/json" } : {}), Authorization: `Token ${token()}`, ...options.headers } });
